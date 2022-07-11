@@ -1,0 +1,13 @@
+11 July
+1.don't believe source tree
+    In my project We use the source tree
+    which is Git GUI.
+    so we download variety of sources from the sourcetree
+    when i updated my account name in Github after that i couldn't do any things
+    such as pull, push, clone in sourcetree 
+    because there was some error. It was "authenticated failed" 
+    but sourcetree didn't show any actions. just showing about the error.
+    so i tried the other way it was git bash.
+    they suggest a certification which is username and email address.
+    so i did it and It works! 
+
