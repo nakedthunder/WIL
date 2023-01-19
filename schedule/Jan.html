@@ -33,3 +33,24 @@ AWS에 접속해서 STG 로그보기 그러고 화면에서 캡쳐해서 댓글�
 new Branch따기 > ex) feature/티켓번호 > 딴 브랜치로 체크아웃 > 거기서 commit/push > 깃랩 MR에 뜸 > title, Assignee나 적고 > submit
 > merge 하고나면 develop으러 붙는다...다시 fetch, pull 받음 소스보임
 - 우리는 develop에서 작업을한다. 
+
+------------------- 
+  2023 01-18  wed 
+------------------- 
+### Ternary operator 삼항 연산자 
+- 리스트에 값이 있다면 값을 변수에 넣어주고 아니면 null을 넣어줘라
+- 값이 있으면 그 조건에 맞춰서 로직을 짜게.. 
+
+private Long displayCate;
+
+displayCate = bcas.brandContentDisplayCateList.size() > 0 ?
+	bcas.brandContentsDisplayCateList.get(0).getDisplayCateSn() : null; 
+	
+if(displayCate != null) {
+	...
+}
+------------------- 
+  2023 01-19 thu
+------------------- 
+엑셀 POI 
+https://techblog.woowahan.com/2698/
