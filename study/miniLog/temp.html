@@ -1,0 +1,58 @@
+
+[ 안돼 안돼 안돼 ]
+반복적인 작업을 해야한다 > 검증부분에서 버그가 발생할 여지가 높다. 
+응답클래스는 형태에 맞게 만들어주는게 좋다. 
+여러개의 에러처리가 힘들다. 
+
+[ @ControllerAdvice ]
+반복적인 작업을 피하기 위해서 @ControllerAdvice를 사용함 
+클래스에 @ControllerAdvice 달면 주입이된다. 
+
+모든 컨트롤러에대한 검증을 캐치할 수 있다. 
+클래스에다가 거기의 exception을 달면 익셉션이 발생할때 해당 메서드가 온다. 
+
+[ ExceptionController 만들기 ]
+- 바인딩리절트를 사용하지 않으면 스프링자체에서 사용을함
+- 컨트롤러어드바이스를 달고 exceptionHandler 메소드를 만들고 …responseStatus를 설정..
+- 익셉션이 컨트롤러로 안들어오고 기존의 메소드로 들어와서 삭제하고 바인딩 리절트 지움
+
+받은 익셉션 토대로 에러처리해서 JSON형태로 응답을 해주기 
+- 잘못된 값은 400에러
+- 파라미터를 exception을 추가하면 파라미터로 주입이 됨 … “MethodArgumentNotValidException”
+- log.error()로 익셉션 로그를 찍음 
+- 정상적으로 익셉션이 넘어옴 > 익셉션은 MethodArgumentNotValidException 이거로 
+- 익셉션클래스를 컨트롤 해서 MethodArgumentNotValidException 가 아니여서 필드에러의 관련된 내용이 담겨져 있지않음 … MethodArgumentNotValidException이 발생했을떄만 메서드가 작동하게 변경해줘야함. 
+- e.getFieldError() 하나만 가져옴
+- 필드에러의 .getFieldI() //잘못된 필드명을 보여줌 
+- .getDefaultMessage //필드가 에러메세지 
+- 어떻게 JSON으로 넘겨야할까요? -> HashMap<>();….
+
+Return 이 될지….궁금
+- JSON에러가 잘 내려오는지….작동이 안됨. 
+- 컨트롤러어드바이스가 기존 컨트롤러는 RestController를 사용해서 Http conveter를 이용해서 
+JSON형태로 응답이 됬는데, @ControllerAdvice는 데이터를 뷰 리졸버를 찾아갈라한다. 
+일반적인 컨트롤러 형태로 찾아갈라는데 컨트롤러어드바이스를 통해 이벤트 메소드를 핸들링하는데
+모델엔 뷰 데이터를 생성해서 뷰 데이터를 넘겨준다. 
+일반적인 핸들링 방식으로는 JSON형태로 작동을 안한다…
+
+JSON형태로 반환하는것을 찾아야함. 
+
+[ 오류 및 REST ]
+Restful GET  요청도 예외를 생성할 수 있으며 표준 HTTP 오류 응답 코드를 변환하는 
+방법…
+
+- @RestController: @Controller + @ResponseBody
+- @ResponseBody
+통해서 만들었던 hashMap을 JSON형태로 응답을 해줄 수 있다. 
+	- 이게 뭔지 찾아보기..
+	- ResponseBody 어노테이션은 모델을 뷰로 렌더링하지않고 반환된 객체를 응답 본문에 쓰드록 지시합니다.
+    - Return 데이터를 본문에 응답할 수 있게 씀?
+
+약간 불편한게 필드에러에 대한 응답클래스를 만들지않음
+HashMap을 쓰지않고 응답전용 클래스를 만듬
+
+
+[ ErrorResponse ]
+> 응답전용 클래스..이 응답은 향후 JSON으로 변환했을 떄 JSON식으로 반환이되게
+어떤 필드가 잘못됬는지 알려줄라면 배열형태로 만들어서 …
+- final로 지정해서 롬복애 @RequireArgsConstructor로함
