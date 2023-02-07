@@ -1,0 +1,29 @@
+### 예외처리 방법
+보통 예외는 4가지 방법으로 처리
+    1. 예외 복구: try ~ catch
+        > 예외가 발생하면 예외 상황에 대해 알맞게 처리하여 복구
+    2. 예외 회피: throw  
+        > 예외를 직접 처리하지 않고 예외를 상위 메소드에 위임
+    3. 예외 전환: restTemplate.doExecute 
+        > 예외를 위임하되 발생한 예외를 그대로 위임x, 적절한 예외로 전환하여 위임
+> 예외 상황을 대응하거나, 복구하거나..다양한 예외처리들이 있다 
+* ref
+https://incheol-jung.gitbook.io/docs/q-and-a/spring/controlleradvice-exceptionhandler
+
+### 예외 복구 범위
+1. 메소드 영역
+    > 메소드 영역은 종속된 기능으로 단순히 try~catch
+2. 클래스 영역
+    > 클래스 내 공통 예외 복구 @ExceptionHandler
+3. 전역 영역
+    > 여러 클래스의 공통 예외 복구는 @ControllerAdivce 
+
+### 예외처리과정 @ControllerAdivce를 왜 사용하는지 
+여러 예외 처리들을 적용하면 코드가 엄청 복잡해진다...if문이든 try~catch로 잡든
+상위 메서드로 예외처리를 위임하든 복잡하고, 유지보수하기 어려워짐 
+    > 비즈니스 로직보다 예외처리를 위한 코드가 더 많아져...이런 문제를 개선하고나 @ExceptionHandler, 
+    @ControllerAdicve를 사용함. 
+
+
+* ref 
+https://jeong-pro.tistory.com/195

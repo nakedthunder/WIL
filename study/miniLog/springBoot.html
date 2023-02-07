@@ -1,0 +1,59 @@
+### 1) @RestController
+- Spring MVC @Controller와 RESTful 컨트롤러인 @RestController의 차이점은
+HTTP ResponseBody가 생성되는 방식이다. 
+- @Controller는 View Page를 반환하지만, @RestController는 객체 VO, DTO를 
+반환하기만 하면, 객체데이터는 application/json 형식의 HTTP ResponseBody에 직접
+작성되게 된다. 
+    
+ex)ECP-Project 
+    @RestController
+    @RequestMapping("/v1/{mallId}/sales")
+    public class PlanDisplayEventApi {
+        > 실무에서도 api클래스 위에 @RestController 를 사용 
+
+    @Controller
+    @ResponseBody
+    public @interface RestController { 
+        ..... 
+    }
+        > 안으로 들어가면 @Controller, @ResponseBody가 들어간 것을 볼 수 있다. 
+
+### @ExceptionHandler와 @ControllerAdicve
+    - @ExceptionHandler: 하나의 클래스에 대한 것이라면, 
+    - @ControllerAdicve: 모든 @Controller 즉, 전역에서 발생할 수 있는 있는 예외처리를 잡음 
+
+### 2) @ControllerAdicve
+> @Controller나 @RestController에서 발생한 예외를 한 곳에서 관리하고
+처리할 수 있게 도와주는 어노테이션 
+> 특정 컨트롤러가 아닌 여러 컨트롤러로 공통 기능을 확장으로 여러 클래스의 공통 예외복구 처리 
+> 전역에서 발생할 수 있는 예외를 잡아 처리한 annotation 
+
+
+### 3) @ExceptionHandler
+- @Controller, @RestController가 적용된 Bean내에 발생하는 예외를 잡아서 하나의 메서드에서 처리
+
+* ref 
+https://jeong-pro.tistory.com/195
+
+ex) 
+@Slf4j
+@ControllerAdvice
+public class ExceptionController {
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseBody
+    public Map<String, String> exceptionHandler(MethodArgumentNotValidException e) {
+                                .....................
+    }
+
+1. @ExceptionHandler(MethodArgumentNotValidException.class)라는 
+어노테이션을 쓰고 인자로 캐치하고 싶은 예외클래스를 등록함.. 
+
+2. ExceptionController에서 해당하는 Bean이 MethodArgumentNotValidException 발생하면, 
+@ExceptionHandler()로 적용된 메서드가 호출됨. 
+
+    * 주의사항
+    1. Controller, RestController에만 적용됨 > service안됨
+    2. 리턴 타입 자유로움.. 
+    3. @ExceptionHandler를 등록한 controller만 적용가능 

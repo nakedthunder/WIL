@@ -1,5 +1,5 @@
 ### ----------------------------------------------------------------------
-            [2023 01-25] POST 데이터 콘텐츠 타입 (create Controller)
+        [2023 01-25] POST 데이터 콘텐츠 타입 (Controller생성, MockMvc)
 ### ----------------------------------------------------------------------
 ### 프로젝트 위치
 1)  PostController.java
@@ -58,36 +58,3 @@ https://shinsunyoung.tistory.com/52
 3. Test컨트롤러에서 MockMvc(테스트용 가짜 객체)를 통해 테스트함 
 4. MockMvc에서 제공하는 메소드를 사용 
 
-### ----------------------------------------------------------------------
-            [2023 01-2] POST 데이터 콘텐츠 타입 (create Controller)
-### ----------------------------------------------------------------------
-### @NotBlank, @Valid, message 사용으로 ko 입력가능
-1) Bean Validation (@NotNull, NotEmpty, NotBlank)
-    - API의 param들을 매번 if문으로 null, 공백을 체크하지않고 Bean Validation 공통화인 @NotBlank 사용 
-    - @NotNull, NotEmpty, NotBlank 가 있다. 
-2) @valid 
-    - @NotBlank설정 후 사용하고자 하는 controller에 내 RequestBpdy에서 @Valid를 추가해야
-    사용가능함 
-
-
-### DTO / VO
-- 사용이유
-    DTO를 사용해 해당 파라미터를 담는다. DTO를 사용하는 이유는 API의 request, response
-    에 맞추기 위해 필요한 데이터만 정의되게 하기위해 따라서 Bean Validation 사용이 더 명백해짐 
-
-### 예외처리 하는 방법
-    만약 null이 들어온 경우 MethodArgumentValidException 예외가 던져짐 (이건 @ControllerAdice에서 다룸)
-    - log.error()에서 출력함 
-*ref
-https://sanghye.tistory.com/36
-
-### @RestController
-
-
-### jsonPath
-
-
-### BingdingResult 
-
-
-### @ControllerAdvice
