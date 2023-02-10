@@ -1,0 +1,37 @@
+### -------------------------------------------------------------------------------
+   [2023 02-09] 게시글 저장2 - (ObjectMapper, @Builder)
+### -------------------------------------------------------------------------------
+### 지난 편 
+    > JSON 형태로 넘어온 데이터를 서비스에 거쳐 레파지토리에 저장을 하고 테스트케이스에서
+    검증을 했고 메소드를 실행될때마다 레파지토리를 clean을 만들어주면서 테스트를 검증했다. 
+
+### 더 쉽게 데이터를 보내기 ObjectMapper 
+    ex) [in the past] 
+        .content("{\"title\":  null, \"content\": \"내용입니다.\" }")
+    기존에 코드를 굉장히 불편한 방식으로 가독성이 떨어지는 방식으로 내렸다.
+    그러나 이제 request로 간단하게 보낼 수 있게 수정하였다. 
+
+    ex) [current]
+        @Autowired
+        private ObjectMapper objectMapper;
+
+        PostCreate request = PostCreate.builder()
+                .title("제목입니다.")
+                .content("내용입니다.")
+                .build();
+
+        String json = objectMapper.writeValueAsString(request);
+        
+    > 객체를 새로 생성할 거 없이 스프릥부트에서 오브젝트 빈을 제공을 해준다.
+
+ 
+### @Builder를 사용하게 된 이유 
+    > 문제: title, content 를 보낼 때 PostCreate클래스 > 생성자에서 변수에 맞춰
+    들어간다해도 순서를 바껴서 값이 뒤틀려지는 경우... 버그를 발견하기 어렵다. 
+
+    롬복에서 제공해주는 @Builder를 사용! -> 디자인패턴에서 "빌더패턴"
+    - 간단한 클래스인경우 @Builder를 달아도 괜찮으나, 생성자 위에 다는 것을 추천 (모순적인 상황발생 가능성)
+
+### 생성자 어노테이션 
+    @AllArgsContructor를 사용하면 생성자 어노테이션만 선언하면 되지만, 
+    @Builder를 사용하기위해 생성자 생성 
