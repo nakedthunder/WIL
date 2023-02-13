@@ -1,0 +1,47 @@
+### -------------------------------------------------------------------------------
+   [2023 02-13] springBoot 환경설정 
+### -------------------------------------------------------------------------------
+### Version 
+  1. springBoot version: 3.0.2
+    - 스프링 부트 3.0부터는 Java 17부터 지원이 된다. 
+  2. Java version: 17 
+  이러고도 오류가나서 Gradle JVM 버전도 확인하였다. 
+  3. Gradle JVM version: 17 
+    - 위치: command + , 로 Build, Execution, Deployment -> Build Tools 
+    -> Gradle 
+
+### 구동시키기 화면에 HelloWorld 띄우기 
+  빌드가 끝나고 패키지가 구성된 것을 볼 수 있다. 
+  1. src > main > java > com.wc.weddingCard 밑에 Controller 패키지 생성
+  2. PostCreate 컨트롤러를 추가하였다. 
+  3. @RestController PostCreate클래스에 선언해줘야함 
+    - 이거 안하면 주소 못찾음 
+  4. 최초에 weddingCardApplication main으로 구동시켜줘야함 
+  5.  @GetMapping("/post") 주소로 입력했을 때 HelloWorld를 반환해준다.
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+### springboot 셋팅 
+1. 자바 11이상으로 추천 (자바8까지 괜찮음, 이하는 하지말기)
+2. 스프링부트 2.5.9 
+3. 디펜던씨는 나중에 해도되지만 
+  - lombok, springWeb, SQL: SpringDataJPA, H2Database
+
+그래들 싱크 완료 되면 처음에 프로젝트가 생긴다. 
+4. application.properties.yml로 변경
+5. build.gradle파일에 추가한 dependencies들이 들어가 있다. 
+6. Java 안에 WebApplication이 있는데 실행해서 톰캣이 8080으로 뜸
+7. 웹 브라우저에 접속하면 정상적으로 접속이 됨 (404 Not found)
+
+### 컨트롤러 생성 
+8. 컨트롤러 라우터가 없는 상황이여서 컨트롤러를 생성 
+  - controller > PostController
+9. @RestController를 추가함
+  - @Controller를 추가할 수 있는데 데이터 기반으로 
+  API응답을 생성하기위해서 @RestController사용 
+10. JSON형태로 응답처리를 함 
+  - @RestController가 있으면 복잡하게 할 필요없이
+  데이터를 응답을 할 수 있다. 
+  - RestController안에 controller, responseBody가 있다. 
+11. 라우팅 
+  - 라우팅을 통해 String helloWorld 를 return할 수 있게 한다. 
