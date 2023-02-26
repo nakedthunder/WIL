@@ -1,0 +1,61 @@
+  /v1/{mallId}/sales/plandisplays/{planDisplaySn}/eventParticipatedResult:
+    get:
+      tags: [ planDisplay ]
+      summary: 증정대상목록 확인
+      operationId: checkEventParticipatedPost
+      description: 증정대상목록 확인
+      parameters:
+        - $ref: '#/parameters/mallIdParam'
+        - name: planDisplaySn
+          type: integer
+          format: int64
+          in: path
+          required: true
+          description: 기획전시일련번호
+        - name: body
+          in: body
+          description: 증정대상목록
+            , 댓글 - participantComment
+            , 댓글제목 - participantCommentTitle
+            , 약관동의여부 - termsAgreeYn - FO에서 판단 (상품/사은품)
+            , 이미지 일련번호
+            , 첨부파일 (Base64)
+          schema:
+            $ref: '#/definitions/EventParticipatedPost'
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/Awards'
+            description: 행사 증정목록
+        400:
+          description: Invalid Parameter
+      security:
+        - ecp_fo: [ ]
+        - ecp_member: [ ]
+
+### 
+- 원인
+
+ - name: body
+          in: body
+          description: 증정대상목록
+            , 댓글 - participantComment
+            , 댓글제목 - participantCommentTitle
+            , 약관동의여부 - termsAgreeYn - FO에서 판단 (상품/사은품)
+            , 이미지 일련번호
+            , 첨부파일 (Base64)
+          schema:
+            $ref: '#/definitions/EventParticipatedPost'     
+
+
+### Get, Post 오랜만에 기본기 생각남 
+- 원래 params: 기획전번호, 멤버 일련번호 
+회원에 관한 정보를 넘겨주는 거니 url에 쿼리스트링으로 값이 보여 
+get말고 post로 보내줘야한다고 하심. 
+* 회원정보가 들어가는 것은 보안문제로 인해 post를 사용해야함 
+
+근데 나는 planDisplaySn만 받고 memberSn은 공통된것을 사용 
+   Long memberSn = RestApiRequestContext.getCurrentMemberSn();
+
+문제는 없었지만, 너무 당연하게 생각한거여서 기본기를 잊고 있었다. 
