@@ -1,0 +1,47 @@
+### 스프링부트 라이브러리 요녀석
+
+초기 셋팅때 라이브러리 설정을 2개 (Spring Web, Thymleaf)만 해줌
+
+그러나 External을 보면 너무 많이 있음. 기본적으로 땡겨져있음
+
+Gradle, Mavenr같은 빌드툴들이 의존관계를 관리를 해줌. 
+
+### Spring Boot Starter Web
+
+Spring Boot Starter Web 라이브러리를 땡기면 관련된 필요한 라이브러리를 땡긴다. → 얘네들도 의존관계가 있다. 
+
+- Spring-boot-starter에 관련된 라이브러리를 다 가지고 있다. Spring-core도 땡긴다.
+
+Gradle을 눌러보면 Dependencies가 있다. 
+
+얘를 열어보면 머가 필요하면 까보면 많은 라이브리를 파고들어가고 한번에 다 땡겨옴 
+
+- 과거: 예전에는 web server → WAS를 직접 서버에 설치를 해놓았다.
+
+그래서 웹서버랑 소스라이브러리랑 분리됨. 내장한 것을 embed로 ….
+
+라이브러리를 빌드하면 웹서버가 띄워지는 거다. (시대가 많이 바뀜) 
+
+### log 써야하는 이유
+
+system.out.prinln()으로 데이터를 출력하면 안된다. log로 남겨야 에러를 모아보거나 로그파일로 관리가된다. 취준생은 서버 세상을 잘 몰른다….
+
+- 실무에서는 로깅을 쓴다. (log에러 메세지 때문에)
+- Spring-boot-starter-logging
+- slf4j(인터페이스), logback(구현체) → 표준이다.
+
+### Test관련 라이브러리
+
+- junit : 자바 진영에서 junit을 씀, 최근에 junit5로 넘어감
+- mockito, assertj, spring-test → 테스트 편리하게 해줌
+
+### 정리
+
+1. spring-boot-starter-tomcat: 톰캣 (웹서버)
+2. spring-webmvc: 스프링 웹 MVC 
+3. spring-boot-starter: 스프링부트 + 코어 + 로깅 
+
+핵심 스프링 부트이다. 
+
+1. log를 쓰자, 에러메세지때문에 logback, slf4j가 표준이다. 
+2. Test는 junit5로 넘어감
