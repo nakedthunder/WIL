@@ -1,0 +1,43 @@
+#####################################################
+    2023-02-28 정적/동적, MVC템플릿, API 
+#####################################################
+### Welcome Page기능 
+정적페이지
+- localhost:8080/hello-static.html
+- 파일 그 자체를 받아오는 것 
+    static/index.html을 올리면 Welcome page기능을 제공한다. 
+    그러나 단순히 HTML파일만 띄어준 정적페이지 불과 
+
+동적페이지
+- localhost:8080/hello 
+    @Controller
+    public class helloController {
+
+        @GetMapping("hello")
+        public String hello(Model model) {
+            model.addAttribute("data", "hello");
+            return "hello";
+        }
+    }
+
+### Thymleaf템플릿 엔진을 사용
+1. controller생성 
+2. Model
+    - Model은 view의 html애서 변수내용으로 렌더링 
+3. template파일 생성 
+    1. controller에서 return값으로 문자를 반환하면 veiwResolver가 화면을 찾아서 처리한다. 
+    2. 스프링부트 템플릿 엔진은 templates/ + {ViewName} + .html
+
+### MVC, 템플릿 엔진
+1. helloMvc메소드 
+    @GetMapping("hello-mvc")
+    public String helloMvc(@RequestParam("name") String name, Model model) {
+        model.addAttribute("name", name); 
+        return "hello-template";
+    }
+2. hello-template 파일로 이동 
+
+3. http://localhost:8080/hello-mvc?name=jess 
+    - jess라는 param을 보냄 
+
+4. 화면에 값 return hello jess 

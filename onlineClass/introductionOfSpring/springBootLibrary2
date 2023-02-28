@@ -6,7 +6,7 @@
 그러나 External을 보면 너무 많이 있음. 기본적으로 땡겨져있음
 Gradle, Maven같은 빌드툴들이 의존관계를 관리를 해줌. 
 
-### Spring Boot Starter Web
+### 라이브러리 살펴보기 ###### ###### ###### ###### ###### ######
 Spring Boot Starter Web 라이브러리를 땡기면 관련된 필요한 라이브러리를 땡긴다. → 얘네들도 의존관계가 있다. 
 
 - Spring-boot-starter에 관련된 라이브러리를 다 가지고 있다. Spring-core도 땡긴다.
@@ -17,6 +17,30 @@ Gradle을 눌러보면 Dependencies가 있다.
 - 과거: 예전에는 web server → WAS를 직접 서버에 설치를 해놓았다.
 그래서 웹서버랑 소스라이브러리랑 분리됨. 내장한 것을 embed로 …
 라이브러리를 빌드하면 웹서버가 띄워지는 거다. (시대가 많이 바뀜) 
+
+### Spring Boot Starter Web
+    - spring-boot-starter-web
+        - spring-boot-starter-tomecat (톰캣 웹서버)
+        - spring-webmvc (스프링 웹 MVC)
+
+### spring-boot-starter (스프링부트+스프링코어+로깅)
+    - spring-boot
+        - spring-core
+    - spring-boot-starter-logging
+        - logback, slf4j 
+
+### spring-boot-starter-test
+    - spring-boot-starter-test
+        - junit: 테스트 프레임워크
+        - mockito: 목 라이브러리 
+        - assertj: 테스트 코드를 좀 더 편하게 작성하는 라이브러리 
+        - spring-test: 스프링 통합 테스트 지원 
+###### ###### ###### ###### ###### ###### ###### ###### ###### 
+
+### Build Gradle -> IntelliJ 
+- 위치: Preferences > Build, Execution... > Build Tools > Gradle
+IntelliJ에서 Gradle을 통해 실행이 기본으로 되어있음
+그러나 Build and run using, Run tests using 을 IntelliJ IDEA로 바꿔야 속도가 빨라짐 
 
 ### log 써야하는 이유
 system.out.prinln()으로 데이터를 출력하면 안된다. log로 남겨야 에러를 모아보거나 로그파일로 관리가된다. 취준생은 서버 세상을 잘 몰른다…

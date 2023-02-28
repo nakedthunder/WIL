@@ -1,0 +1,38 @@
+#####################################################
+    2023-02-27 
+#####################################################
+### External Libraries 
+사용하는 라이브러리들 
+
+### build.gradle
+- spring boot 1.5.9
+- log4j-core, log4j-api
+- elasticsearch
+- cron expression to human readabl
+- Hibernate 
+- Thymleaf Engine
+- h2 
+- SSO 
+- dateTime
+    def getDateTime() {
+        DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+        df.format(new Date());
+    }
+
+### 도메인 구조형 
+ecp-web-bo
+    - .idea
+    - build
+    - codedeploy
+    - libs
+    - out
+    - sql
+    - src
+    - buld.gradle (파일)
+
+### release branch 
+1. dev -> stg 매일 11시, 4시 배포된다. 
+2. 운영배포기간 2주 단위 3월2일 , 3월 15일 
+    - 3/15일 배포면 3월 12일 월요일까지는 해야함^_^
+
+- 더이상 자가 테스트가 안될때는 QA테스트에 맡기자 하루에 11시, 4시 배포니깐 
