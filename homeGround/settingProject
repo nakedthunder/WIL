@@ -1,0 +1,31 @@
+### Project Settings ###
+1. gitLab > url 복사 
+2. 인텔리제이 > VCS clone 클론받아준다. 
+3. IntelliJ 설정 
+    - JDK 1.8 버전 설치
+    - gitlab 클론받은 프로젝트 확인
+4. gradle경로 확인
+    - 인텔리제이 설정 > Gradle > Gradle settings > Gradle User home: C:\.gradle 변경 
+    (예전에 공백있어서 읽지못한 문제있었음)
+    - Setting > Build, E...> Gradle > Build and run usring, Run tests usting: "IntelliJ IDEA" 변경 
+5. Run/Debug Configurations 설정
+    - Edit Configuration > + Gradle로 추가 
+        - Gradle project: API, BO, BATCH 
+        - Environment variables: SPRING_PROFILES_ACTIVE=local,membership-test
+        - VM Options: 
+            -DskipGenerateQueryDSL=true
+            -Dfile.encoding=UTF-8
+            -Dspring.profiles.active=local,membership-test
+        - Run: clean bootRun
+6. application-local.yml 추가
+    - api, bo, batch에다가 추가 (공유된 파일로 하자, 다른것했다가 오류나서 빌드안됨)
+7. Gradle 빌드해주고 
+8. Run 실행 -> Spring boot가 잘 뜬것을 확인해준다. 
+
+### 인텔리제이 캐쉬초기화, 새로고침 
+- File > Invalidate Caches > Clear file system cache and Local History > "Invalidate and Restart" 해준다. 
+
+### applicatio.yml 
+- 이 프로젝트에서 사용하는 설정값들을 관리하는 파일 (애플리케이션의 설정과 관련된 변수들을 파일 key : value)
+- 계층 구조로 작성되어있다. 
+- 다른 파일포맷: .properties, .ini 등 
